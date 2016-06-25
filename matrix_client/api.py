@@ -400,3 +400,11 @@ class MatrixHttpApi(object):
             return self.base_url + "/_matrix/media/r0/download/" + mxcurl[6:]
         else:
             raise ValueError("MXC URL did not begin with 'mxc://'")
+
+    def get_presence(self, user_id):
+        content = self._send("GET", "/presence/%s/status" % user_id)
+        return content['presence']
+
+    def set_presence(self, user_id, presence, status_msg):
+        content = {"presence": presence, "status_msg": status_msg}
+        self._send("PUT", "/presence/%s/status" % user_id, content)

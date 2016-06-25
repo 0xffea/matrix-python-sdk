@@ -314,3 +314,9 @@ class User(object):
 
     def set_avatar_url(self, avatar_url):
         return self.api.set_avatar_url(self.user_id, avatar_url)
+
+    def get_presence(self):
+        return self.api.get_presence(self.user_id)
+
+    def set_presence(self, presence="online", status_msg=""):
+        return self.api.set_presence(self.user_id, presence, status_msg)
